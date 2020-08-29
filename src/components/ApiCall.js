@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import {OMDBKey} from "../config"
 
-
-
-function App() {
+import movieSearch from "./MovieSearch";
+function ApiCall(props) {
+  console.log(props)
   const [movieList, setMovieList] = useState([]);
   const [movieTitle, setMovieTitle] = useState("");
   const [movieYear, setMovieYear] = useState("");
   const [moviePoster, setMoviePoster] = useState("");
+  // const [movieSearch, setMovieSearch] = useState(searchMovieProp)
 
 
   // API dependencies
@@ -15,6 +17,9 @@ function App() {
   const dataUrl = `http://www.omdbapi.com/?s=&apikey=${apiKey}&`;
   const posterUrl = `http://img.omdbapi.com/?s=apikey=${apiKey}&`;
   const movieSearch = "twilight";
+  const kaka = props.searchMovieProp; 
+
+
 
   // HTTPS request to API (OMDB)
   useEffect(() => {
@@ -22,13 +27,14 @@ function App() {
       method: "GET",
       url: dataUrl,
       params: {
-        s: movieSearch,
+        s: kaka,
       },
     })
       .then((res) => {
+        setMovieList(res.data.Search);
         res.data.Search.map((movieInfo) => {
           if (movieInfo.Type === "movie") {
-            setMovieList(movieInfo);
+            
             setMovieTitle(movieInfo.Title);
             setMovieYear(movieInfo.Year);
             setMoviePoster(movieInfo.Poster);
@@ -41,10 +47,16 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      
+    <div className="ApiCall">
+      <ul>
+        {movieList.map(data => {
+          return (
+            <li>{data.Title} ({data.Year})</li>
+          )
+        })}
+      </ul>
     </div>
   );
 }
 
-export default App;
+export default ApiCall;
