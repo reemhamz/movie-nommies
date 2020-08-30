@@ -9,7 +9,7 @@ function App() {
     <div className="App">
       <h1> Nominate 5 movies ~ 🎥✨</h1>
       <MovieSearch />
-      <ApiCall />
+      {/* <ApiCall /> */}
     </div>
   );
 }
