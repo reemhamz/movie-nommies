@@ -1,0 +1,65 @@
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Krona+One&family=Lobster&display=swap");
+
+$Lobster: "Lobster", cursive;
+$Krona: "Krona One", sans-serif;
+$Abril: "Abril Fatface", cursive;
+
+html {
+  font-size: 62.5%;
+}
+
+h1 {
+  display: flex;
+  text-transform: uppercase;
+  .tinyHeader {
+    font-family: $Lobster;
+    font-size: 4rem;
+    position: relative;
+    align-self: center;
+    margin-right: 20px;
+    &::before {
+      content: "";
+      position: absolute;
+      background-color: $gold;
+      width: 100%;
+      height: 3px;
+      top: 0;
+      bottom: 0;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      background-color: $gold;
+      width: 100%;
+      height: 3px;
+      bottom: 0px;
+      left: 0px;
+    }
+  }
+  .largeHeader {
+    font-family: $Krona;
+    font-size: 8rem;
+    line-height: 0.9;
+    position: relative;
+    color: $gold;
+    z-index: 0;
+    &::before {
+      content: "MOVIE NOMMIES";
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
+      z-index: 1;
+    }
+    // &::after {
+    //   content: "MOVIE NOMMIES";
+    //   position: absolute;
+    //   bottom: -1px;
+    //   left: 0px;
+    //   text-shadow: 0 0 2px red, 0 0 2px red, 0 0 2px red, 0 0 2px red;
+    //   overflow: hidden;
+    //   z-index: -1;
+      
+    // }
+  }
+}

@@ -1,11 +1,18 @@
 @import "./setup";
 @import "./colors";
 @import "./fonts";
+@import "./Header";
+@import "./ApiCall";
+
 
 
 body {
     background: salmon;
     // text-align: center;
 }
-
+.wrapper {
+    max-width: 1080px;
+    width: 70%;
+    margin: 0 auto;
+}
 

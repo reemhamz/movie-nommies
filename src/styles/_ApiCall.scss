@@ -1,0 +1,23 @@
+.moviesResultListItem {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid grey;
+  margin: 0 auto;
+  padding: 20px;
+  img {
+    display: block;
+    border-radius: 15px;
+    filter: drop-shadow(0 0 0.75rem #145374);
+    -webkit-mask-image: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(rgba(0, 0, 0, 0)),
+      to(rgba(0, 0, 0, 0))
+    );
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+  }
+}

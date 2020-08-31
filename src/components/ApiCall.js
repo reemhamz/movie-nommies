@@ -4,7 +4,6 @@ import { OMDBKey } from "../config";
 
 import movieSearch from "./MovieSearch";
 function ApiCall(props) {
-  console.log(props);
 
   // Component states
   const [movieList, setMovieList] = useState([]);
@@ -29,7 +28,7 @@ function ApiCall(props) {
       },
     })
       .then((res) => {
-        console.log(res.data.Search);
+        console.log(res)
 
         setMovieList(res.data.Search);
       })
@@ -40,19 +39,33 @@ function ApiCall(props) {
 
   return (
     <div className="ApiCall">
-      <ul>
-        {movieList !== undefined &&
-          movieList.map((movieInfo) => {
-            console.log(movieInfo);
-            if (movieInfo.Type === "series") {
-              return (
-                <li>
-                  {movieInfo.Title} ({movieInfo.Year}) --> {movieInfo.Type}
-                </li>
-              );
-            }
-          })}
-      </ul>
+      <div className="moviesResult">
+        <ul className="moviesResultList wrapper">
+          {movieList !== undefined &&
+            movieList.map((movieInfo) => {
+              
+              
+              if (movieInfo.Type === "movie" && movieInfo.Poster !== "N/A") {
+                return (
+                  <li className="moviesResultListItem ">
+                    <div className="moviePoster">
+                      <img src={movieInfo.Poster} alt={`Poster of the movie ${movieInfo.Title} from the year ${movieInfo.Year}`}/>
+                    </div>
+
+                    <div className="movieTitle">
+                      <h2>{movieInfo.Title}</h2>
+                    </div>
+
+                    <div className="movieYear">
+                      <h3>({movieInfo.Year})</h3>
+                    </div>
+                    
+                  </li>
+                );
+              }
+            })}
+        </ul>
+      </div>
     </div>
   );
 }
