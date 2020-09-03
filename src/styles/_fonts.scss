@@ -1,8 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Krona+One&family=Lobster&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Krona+One&family=Lobster&family=PT+Sans+Narrow&display=swap");
 
 $Lobster: "Lobster", cursive;
 $Krona: "Krona One", sans-serif;
 $Abril: "Abril Fatface", cursive;
+$Narrow: "PT Sans Narrow", sans-serif;
 
 html {
   font-size: 62.5%;
@@ -51,15 +52,14 @@ h1 {
       text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
       z-index: 1;
     }
-    // &::after {
-    //   content: "MOVIE NOMMIES";
-    //   position: absolute;
-    //   bottom: -1px;
-    //   left: 0px;
-    //   text-shadow: 0 0 2px red, 0 0 2px red, 0 0 2px red, 0 0 2px red;
-    //   overflow: hidden;
-    //   z-index: -1;
-      
-    // }
   }
+}
+
+h2 {
+  font-size: 4rem;
+  text-transform: uppercase;
+  font-family: $Narrow;
+  color: #f2a07b;
+  text-shadow: 0 0 1px #7d0633, 0 0 1px #7d0633, 0 0 1px #7d0633,
+    0 0 1px #7d0633;
 }

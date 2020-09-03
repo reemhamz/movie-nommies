@@ -4,15 +4,16 @@
 @import "./Header";
 @import "./ApiCall";
 
-
-
 body {
-    background: salmon;
-    // text-align: center;
-}
-.wrapper {
-    max-width: 1080px;
-    width: 70%;
-    margin: 0 auto;
+  background-image: linear-gradient(to top, #e14fad 0%, #f9d423 100%);
 }
 
+.App {
+  background-color: $white;
+}
+
+.wrapper {
+  max-width: 1080px;
+  width: 95%;
+  margin: 0 auto;
+}

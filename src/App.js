@@ -6,7 +6,7 @@ import MovieSearch from "./components/MovieSearch";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App wrapper">
       <Header />
       <MovieSearch />
     </div>

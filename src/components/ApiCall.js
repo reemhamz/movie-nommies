@@ -40,7 +40,7 @@ function ApiCall(props) {
   return (
     <div className="ApiCall">
       <div className="moviesResult">
-        <ul className="moviesResultList wrapper">
+        <ul className="moviesResultList">
           {movieList !== undefined &&
             movieList.map((movieInfo) => {
               
@@ -49,17 +49,18 @@ function ApiCall(props) {
                 return (
                   <li className="moviesResultListItem ">
                     <div className="moviePoster">
-                      <img src={movieInfo.Poster} alt={`Poster of the movie ${movieInfo.Title} from the year ${movieInfo.Year}`}/>
+                      <img
+                        src={movieInfo.Poster}
+                        alt={`Poster of the movie ${movieInfo.Title} from the year ${movieInfo.Year}`}
+                      />
+                      <div className="moviePosterYear">
+                        <span>{movieInfo.Year}</span>
+                      </div>
                     </div>
 
                     <div className="movieTitle">
                       <h2>{movieInfo.Title}</h2>
                     </div>
-
-                    <div className="movieYear">
-                      <h3>({movieInfo.Year})</h3>
-                    </div>
-                    
                   </li>
                 );
               }
