@@ -1,9 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Krona+One&family=Lobster&family=PT+Sans+Narrow&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Krona+One&family=Lobster&family=PT+Sans+Narrow&family=Podkova:wght@400;600;700;800&display=swap");
 
 $Lobster: "Lobster", cursive;
 $Krona: "Krona One", sans-serif;
 $Abril: "Abril Fatface", cursive;
 $Narrow: "PT Sans Narrow", sans-serif;
+$Podkova: "Podkova", serif;
 
 html {
   font-size: 62.5%;
@@ -62,4 +63,18 @@ h2 {
   color: #f2a07b;
   text-shadow: 0 0 1px #7d0633, 0 0 1px #7d0633, 0 0 1px #7d0633,
     0 0 1px #7d0633;
+}
+
+h3 {
+  font-size: 3rem;
+  font-family: $Podkova;
+  font-weight: 800;
+
+  span {
+    font-size: 2.5rem;
+    color: $darkOrange;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }

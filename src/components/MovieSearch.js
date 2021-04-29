@@ -8,21 +8,21 @@ function MovieSearch() {
     e.preventDefault();
     setSearchInput(e.target.value);
   };
-    
-    const handleSubmit = (e) => {
-        e.preventDefault();
-  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
 
   return (
     <div className="MovieSearch">
-          <form action="#" onSubmit={handleSubmit}>
-        <label htmlFor="movieSearch" class="visuallyHidden">
+      <form action="#" onSubmit={handleSubmit}>
+        <label htmlFor="movieSearch" className="visuallyHidden">
           Search for a movie
         </label>
         <input
           type="text"
           id="movieSearch"
-                  placeholder="Search for a movie..."
+          placeholder="Search for a movie..."
           onChange={handleChange}
         />
         <button type="submit">
@@ -30,8 +30,8 @@ function MovieSearch() {
             🎬
           </span>
         </button>
-          </form>
-          <ApiCall movieSearchProp={searchInput}/>
+      </form>
+      <ApiCall movieSearchProp={searchInput} />
     </div>
   );
 }
