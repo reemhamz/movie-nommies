@@ -4,7 +4,7 @@ import firebase from "./FirebaseCall";
 import "firebase/database";
 
 // importing ticket icon
-import { Ticket } from "phosphor-react";
+import { Ticket, Info } from "phosphor-react";
 
 function ApiCall(props) {
   // Component states
@@ -25,7 +25,7 @@ function ApiCall(props) {
       },
     })
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         setMovieList(res.data.Search);
       })
       .catch((err) => {
@@ -58,17 +58,23 @@ function ApiCall(props) {
                     </div>
                     <div className="movieInfo">
                       <div className="movieTitle">
-                        <h3>
-                          {movieInfo.Title} <hr/>
-                          <span>({movieInfo.Year})</span>{" "}
-                        </h3>
+                        <h3>{movieInfo.Title}</h3>
                       </div>
-                      <button
-                        onClick={() => nominateMovie(movieInfo)}
-                        aria-label="nominate movie"
-                      >
-                        <Ticket size={40} />
-                      </button>
+                        <div className="movieYear">
+                          <span>Year:</span>
+                          <h4>{ movieInfo.Year}</h4>
+                      </div>
+                      <div className="movieButtons">
+                        <button
+                          onClick={() => nominateMovie(movieInfo)}
+                          aria-label="nominate movie"
+                        >
+                          <Ticket size={30} />
+                        </button>
+                        <button aria-label="view movie information">
+                          <Info size={30} />
+                        </button>
+                      </div>
                     </div>
                   </li>
                 );
