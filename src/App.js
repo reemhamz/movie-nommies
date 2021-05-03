@@ -1,16 +1,16 @@
 import React from "react";
 import "./styles/App.scss";
 
-import Header from "./components/Header";
-import MovieSearch from "./components/MovieSearch";
+import Hero from "./components/Hero";
 import Nominations from "./components/Nominations";
 
 function App() {
   return (
     <div className="App wrapper">
-      <Header />
-      <MovieSearch />
-      <Nominations />
+      <Hero />
+      <main>
+        <Nominations />
+      </main>
     </div>
   );
 }

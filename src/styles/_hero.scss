@@ -1,0 +1,27 @@
+.Hero {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: $white;
+  .heroTitles {
+    width: 100%;
+    display: flex;
+    margin-top: 80px;
+    align-items: center;
+    justify-content: center;
+  }
+  .headings {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+  }
+  .heroImage {
+    background-image: url("../assets/movieCamera.png");
+    background-size: cover;
+    height: 300px;
+    width: 360px;
+    object-fit: cover;
+  }
+}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ApiCall from "./ApiCall";
 
 function MovieSearch() {
@@ -22,14 +22,9 @@ function MovieSearch() {
         <input
           type="text"
           id="movieSearch"
-          placeholder="Search for a movie..."
+          placeholder="🔍 Search for a movie..."
           onChange={handleChange}
         />
-        <button type="submit">
-          <span role="img" aria-label="action">
-            🎬
-          </span>
-        </button>
       </form>
       <ApiCall movieSearchProp={searchInput} />
     </div>

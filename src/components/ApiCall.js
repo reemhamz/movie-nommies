@@ -3,7 +3,7 @@ import axios from "axios";
 import firebase from "./FirebaseCall";
 import "firebase/database";
 
-// importing ticket icon
+// importing icons
 import { Ticket, Info } from "phosphor-react";
 
 function ApiCall(props) {
@@ -38,6 +38,8 @@ function ApiCall(props) {
     dbRef.push({
       movieName: movieID.Title,
       year: movieID.Year,
+      poster: movieID.Poster,
+      imdbID: movieID.imdbID
     });
   };
 
@@ -60,9 +62,9 @@ function ApiCall(props) {
                       <div className="movieTitle">
                         <h3>{movieInfo.Title}</h3>
                       </div>
-                        <div className="movieYear">
-                          <span>Year:</span>
-                          <h4>{ movieInfo.Year}</h4>
+                      <div className="movieYear">
+                        <span>Year:</span>
+                        <h4>{movieInfo.Year}</h4>
                       </div>
                       <div className="movieButtons">
                         <button
@@ -71,9 +73,16 @@ function ApiCall(props) {
                         >
                           <Ticket size={30} />
                         </button>
-                        <button aria-label="view movie information">
-                          <Info size={30} />
-                        </button>
+                        
+                          <a
+                            href={`https://imdb.com/title/${movieInfo.imdbID}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="view movie information"
+                          >
+                            <Info size={30} />
+                          </a>
+                        
                       </div>
                     </div>
                   </li>

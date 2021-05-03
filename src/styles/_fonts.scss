@@ -2,9 +2,6 @@
 
 $Lobster: "Lobster", cursive;
 $Krona: "Krona One", sans-serif;
-$Abril: "Abril Fatface", cursive;
-$Narrow: "PT Sans Narrow", sans-serif;
-$Podkova: "Podkova", serif;
 $Noto: 'Noto Serif', serif;
 
 html {
@@ -58,16 +55,21 @@ h1 {
 }
 
 h2 {
-  font-size: 4rem;
-  text-transform: uppercase;
-  font-family: $Narrow;
-  color: #f2a07b;
-  text-shadow: 0 0 1px #7d0633, 0 0 1px #7d0633, 0 0 1px #7d0633,
-    0 0 1px #7d0633;
+  font-size: 1.8rem;
+  font-family: $Noto;
+  margin-left: 20px;
+  margin-top: 20px;
+  width: 80%;
 }
 
 h3 {
   font-size: 2.2rem;
   font-family: $Noto;
   font-weight: 800;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
 }
