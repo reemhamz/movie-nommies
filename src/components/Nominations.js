@@ -5,7 +5,7 @@ import firebase from "./FirebaseCall";
 import "firebase/database";
 
 // importing icons
-import { Ticket, Info } from "phosphor-react";
+import { Info, Trash } from "phosphor-react";
 // importing React Modal package for better accessibility in modal code
 import Modal from "react-modal";
 
@@ -13,67 +13,78 @@ import Modal from "react-modal";
 const customStyles = {
   content: {
     top: "0",
-    background: "red",
-    // left: "50%",
+    // left: "0",
     right: "0",
-    // bottom: "auto",
-    // marginRight: "-50%",
-    // transform: "translate(-50%, -50%)",
-    // display: "flex",
+    width: "40%",
   },
 };
 Modal.setAppElement("#root");
-function Nominations() {
 
+function Nominations() {
+  const dbRef = firebase.database().ref();
+  
   const [nominies, setNominies] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
+  const [toggleBanner, setToggleBanner] = useState(false);
 
+  // toggle modal to open
   const toggleModal = () => {
     setModalOpen(!modalOpen);
   };
 
-  const removeMovie = () => {};
+  // remove movie from nomination list
+  const removeMovie = (movieID) => {
+    dbRef.child(movieID).remove();
+  };
+
+  // set nomination list limit
+  
 
   useEffect(() => {
     // variable holding reference to our database hosted on Firebase
-    const dbRef = firebase.database().ref();
+
     dbRef.on("value", (response) => {
-      const dataArray = [];
       const movieData = response.val();
+      const dataArray = [];
       for (let key in movieData) {
         dataArray.push({ key: key, info: movieData[key] });
       }
       setNominies(dataArray);
+      toggleModal();
+      console.log(dataArray);
+      dataArray.length === 5 && setToggleBanner(true);
     });
   }, []);
 
   return (
     <div className="Nominations">
+      <h1>hello</h1>
+      {toggleBanner && (
+        <div>
+          <h1>you've reached the max amount of movies</h1>
+        </div>
+      )}
       <button onClick={toggleModal}>open modal</button>
       <Modal
         isOpen={modalOpen}
         onRequestClose={toggleModal}
         style={customStyles}
         contentLabel="Example Modal"
-        className="modal"
-        overlayClassName="modalOverlay"
+        // className="Modal"
+        // overlayClassName="modalOverlay"
       >
         <ul className="nominationsList">
           {nominies.length > 0 &&
             nominies.map((nominie, index) => {
-              console.log(nominie.info);
               return (
-                <li
-                  className="moviesResultListItem nominationsListItem"
-                  key={index}
-                >
+                <li className=" nommiesListItem" key={index}>
                   <div className="moviePoster">
                     <img
                       src={nominie.info.poster}
-                      alt={`Poster of the movie ${nominie.info.movieName} from the year ${nominie.info.year}`}
+                      alt={`Poster of the movie ${nominie.info.Title} from the year ${nominie.info.year}`}
                     />
                   </div>
-                  <div className="nominie">
+                  <div className="movieInfo">
                     <div className="movieTitle">
                       <h3>{nominie.info.movieName}</h3>
                     </div>
@@ -83,10 +94,10 @@ function Nominations() {
                     </div>
                     <div className="movieButtons">
                       <button
-                        onClick={() => removeMovie(nominie)}
-                        aria-label="nominate movie"
+                        onClick={() => removeMovie(nominie.key)}
+                        aria-label="remove movie from nominations"
                       >
-                        <Ticket size={30} />
+                        <Trash size={30} />
                       </button>
 
                       <a

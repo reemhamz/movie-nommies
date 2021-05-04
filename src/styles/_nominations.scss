@@ -1,11 +1,12 @@
 .Nominations {
-  .modal {
-      background: wheat;
+  background: pink;
+  overflow: scroll;
     .nominationsList {
-      background: red;
-      .nominationsListItem {
-        width: 100%;
+        overflow-y: scroll;
+      background: olive !important;
+      .nommiesListItem {
+        width: 80%!important;
+        background: wheat;
       }
     }
-  }
 }

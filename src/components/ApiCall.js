@@ -9,7 +9,7 @@ import { Ticket, Info } from "phosphor-react";
 function ApiCall(props) {
   // Component states
   const [movieList, setMovieList] = useState([]);
-
+  // const [disableButton, setDisableButton] = useState(false)
   // API dependencies
   const apiKey = "43090bb1";
   const dataUrl = `http://www.omdbapi.com/?s=&apikey=${apiKey}&`;
@@ -25,22 +25,27 @@ function ApiCall(props) {
       },
     })
       .then((res) => {
-        console.log(res);
         setMovieList(res.data.Search);
       })
       .catch((err) => {
         console.log(err);
       });
+    dbRef.on("value", (response) => {
+      const movieData = response.val();
+      console.log(movieData)
+    })
   }, [props.movieSearchProp]);
 
   const nominateMovie = (movieID) => {
-    console.log(movieID);
+    // push to firebase
     dbRef.push({
       movieName: movieID.Title,
       year: movieID.Year,
       poster: movieID.Poster,
-      imdbID: movieID.imdbID
+      imdbID: movieID.imdbID,
     });
+    // disable nomination button
+    // console.log(dbRef)
   };
 
   return (
@@ -70,19 +75,19 @@ function ApiCall(props) {
                         <button
                           onClick={() => nominateMovie(movieInfo)}
                           aria-label="nominate movie"
+                          // disabled={disableButton}
                         >
                           <Ticket size={30} />
                         </button>
-                        
-                          <a
-                            href={`https://imdb.com/title/${movieInfo.imdbID}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="view movie information"
-                          >
-                            <Info size={30} />
-                          </a>
-                        
+
+                        <a
+                          href={`https://imdb.com/title/${movieInfo.imdbID}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label="view movie information"
+                        >
+                          <Info size={30} />
+                        </a>
                       </div>
                     </div>
                   </li>
