@@ -11,7 +11,7 @@ const dbRef = firebase.database().ref();
 
 const NominationContextProvider = (props) => {
 
-  const [nominationArray, setNominationArray] = useState("howdy partner");
+  const [nominationArray, setNominationArray] = useState([]);
 
   const updateNominations = () => {};
 

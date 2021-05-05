@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 
 // importing Firebase to be used for modal
 import firebase from "./FirebaseCall";
 import "firebase/database";
+
+// importing context for state management
+import { NominationContext } from "./context/NominationContext";
 
 // importing icons
 import { Info, Trash } from "phosphor-react";
@@ -22,10 +25,12 @@ Modal.setAppElement("#root");
 
 function Nominations() {
   const dbRef = firebase.database().ref();
-  
+
   const [nominies, setNominies] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [toggleBanner, setToggleBanner] = useState(false);
+
+  const { nominationArray, setNominationArray } = useContext(NominationContext);
 
   // toggle modal to open
   const toggleModal = () => {
@@ -38,7 +43,6 @@ function Nominations() {
   };
 
   // set nomination list limit
-  
 
   useEffect(() => {
     // variable holding reference to our database hosted on Firebase
@@ -50,21 +54,25 @@ function Nominations() {
         dataArray.push({ key: key, info: movieData[key] });
       }
       setNominies(dataArray);
-      toggleModal();
       console.log(dataArray);
       dataArray.length === 5 && setToggleBanner(true);
     });
   }, []);
 
+  useEffect(() => {
+    dbRef.on("child_added", () => {
+      toggleModal();
+    });
+  }, []);
+
   return (
     <div className="Nominations">
-      <h1>hello</h1>
       {toggleBanner && (
         <div>
           <h1>you've reached the max amount of movies</h1>
         </div>
       )}
-      <button onClick={toggleModal}>open modal</button>
+      <button onClick={toggleModal} class="nominationsToggle">open modal</button>
       <Modal
         isOpen={modalOpen}
         onRequestClose={toggleModal}

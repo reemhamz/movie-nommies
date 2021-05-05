@@ -1,6 +1,11 @@
 .Nominations {
-  // background: pink;
+  position: absolute;
+  top: 0;
+  right: 0;
   overflow: scroll;
+  .nominationsToggle {
+    
+  }
     .nominationsList {
         overflow-y: scroll;
       background: olive !important;

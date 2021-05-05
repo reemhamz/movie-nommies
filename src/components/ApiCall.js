@@ -17,14 +17,12 @@ function ApiCall(props) {
   // Component states
   const [movieList, setMovieList] = useState([]);
   const { nominationArray, setNominationArray } = useContext(NominationContext);
-  
-  // const [disableButton, setDisableButton] = useState(false)
+
   // API dependencies
   const apiKey = "43090bb1";
   const dataUrl = `http://www.omdbapi.com/?s=&apikey=${apiKey}&`;
   const posterUrl = `http://img.omdbapi.com/?s=apikey=${apiKey}&`;
   const dbRef = firebase.database().ref();
-  
 
   useEffect(() => {
     // HTTPS request to API (OMDB)
@@ -41,33 +39,30 @@ function ApiCall(props) {
       .catch((err) => {
         console.log(err);
       });
-    
   }, [props.movieSearchProp]);
 
-    const nominateMovie = (movieID) => {
-      // push to firebase
-      dbRef.push({
-        movieName: movieID.Title,
-        year: movieID.Year,
-        poster: movieID.Poster,
-        imdbID: movieID.imdbID,
-      });
-      // setNominationArray("you set me str8!")
-  
-    };
+  const nominateMovie = (movieID) => {
+    // push to firebase
+    dbRef.push({
+      movieName: movieID.Title,
+      year: movieID.Year,
+      poster: movieID.Poster,
+      imdbID: movieID.imdbID,
+    });
+  };
 
   useEffect(() => {
-        dbRef.on("value", (response) => {
-          const movieData = response.val();
-          const movieArray = [];
-          for (let key in movieData) {
-            movieArray.push({ key: key, info: movieData[key] });
-          }
-          setNominationArray(movieArray);
-        });
-  }, [])
-
-  console.log("THIS IS THE CXONTEXT!!1",nominationArray);
+    dbRef.on("value", (response) => {
+      const movieData = response.val();
+      const movieArray = [];
+      const movieIDArray = [];
+      for (let key in movieData) {
+        movieArray.push({ key: key, info: movieData[key] });
+      }
+      movieArray.map((movie) => movieIDArray.push(movie.info.imdbID));
+      setNominationArray(movieIDArray);
+    });
+  }, []);
 
   return (
     <div className="ApiCall">
@@ -75,7 +70,7 @@ function ApiCall(props) {
         <ul className="moviesResultList">
           {movieList !== undefined &&
             movieList.map((movieInfo, index) => {
-              if (movieInfo.Type === "movie" && movieInfo.Poster !== "N/A") {
+              if (movieInfo.Type === "movie") {
                 return (
                   <li className="moviesResultListItem" key={index}>
                     <div className="moviePoster">
@@ -96,11 +91,10 @@ function ApiCall(props) {
                         <button
                           onClick={() => nominateMovie(movieInfo)}
                           aria-label="nominate movie"
-                          // disabled={disableButton}
+                          disabled={nominationArray.includes(movieInfo.imdbID) || nominationArray.length>=5}
                         >
                           <Ticket size={30} />
                         </button>
-
                         <a
                           href={`https://imdb.com/title/${movieInfo.imdbID}`}
                           target="_blank"
