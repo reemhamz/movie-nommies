@@ -29,7 +29,6 @@ function Hero() {
         </div>
         <div className="heroImage"></div>
       </header>
-      <MovieSearch />
     </div>
   );
 }

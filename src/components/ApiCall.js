@@ -1,7 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+
+// importing axios for API call
 import axios from "axios";
+
+// importing firebase
 import firebase from "./FirebaseCall";
 import "firebase/database";
+
+// importing context for state management
+import { NominationContext } from "./context/NominationContext";
 
 // importing icons
 import { Ticket, Info } from "phosphor-react";
@@ -9,14 +16,18 @@ import { Ticket, Info } from "phosphor-react";
 function ApiCall(props) {
   // Component states
   const [movieList, setMovieList] = useState([]);
+  const { nominationArray, setNominationArray } = useContext(NominationContext);
+  
   // const [disableButton, setDisableButton] = useState(false)
   // API dependencies
   const apiKey = "43090bb1";
   const dataUrl = `http://www.omdbapi.com/?s=&apikey=${apiKey}&`;
   const posterUrl = `http://img.omdbapi.com/?s=apikey=${apiKey}&`;
   const dbRef = firebase.database().ref();
-  // HTTPS request to API (OMDB)
+  
+
   useEffect(() => {
+    // HTTPS request to API (OMDB)
     axios({
       method: "GET",
       url: dataUrl,
@@ -30,23 +41,33 @@ function ApiCall(props) {
       .catch((err) => {
         console.log(err);
       });
-    dbRef.on("value", (response) => {
-      const movieData = response.val();
-      console.log(movieData)
-    })
+    
   }, [props.movieSearchProp]);
 
-  const nominateMovie = (movieID) => {
-    // push to firebase
-    dbRef.push({
-      movieName: movieID.Title,
-      year: movieID.Year,
-      poster: movieID.Poster,
-      imdbID: movieID.imdbID,
-    });
-    // disable nomination button
-    // console.log(dbRef)
-  };
+    const nominateMovie = (movieID) => {
+      // push to firebase
+      dbRef.push({
+        movieName: movieID.Title,
+        year: movieID.Year,
+        poster: movieID.Poster,
+        imdbID: movieID.imdbID,
+      });
+      // setNominationArray("you set me str8!")
+  
+    };
+
+  useEffect(() => {
+        dbRef.on("value", (response) => {
+          const movieData = response.val();
+          const movieArray = [];
+          for (let key in movieData) {
+            movieArray.push({ key: key, info: movieData[key] });
+          }
+          setNominationArray(movieArray);
+        });
+  }, [])
+
+  console.log("THIS IS THE CXONTEXT!!1",nominationArray);
 
   return (
     <div className="ApiCall">
