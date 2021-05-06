@@ -11,6 +11,9 @@ import { Info, Trash, XSquare } from "phosphor-react";
 import { StyleRoot } from "radium";
 import { animationStyles } from "./animationConfig";
 
+// importing stock image for missing movie posters
+import StockPoster from "../assets/stockPhoto.jpg";
+
 function Nominations() {
   // firebase reference
   const dbRef = firebase.database().ref();
@@ -32,17 +35,19 @@ function Nominations() {
 
   useEffect(() => {
     // variable holding reference to our database hosted on Firebase
-    const dataArray = [];
     dbRef.on("value", (response) => {
       const movieData = response.val();
+      const dataArray = [];
       for (let key in movieData) {
         dataArray.push({ key: key, info: movieData[key] });
       }
       setNominies(dataArray);
       console.log(dataArray);
 
-      
-      dataArray.length === 0 && setToggleBanner(false);
+      // displays banner when the maximum of 5 movies have been selected
+      dataArray.length === 5 && setToggleBanner(false);
+
+      dataArray.length === 0 && setModalOpen(false)
     });
   }, []);
 
@@ -86,10 +91,17 @@ function Nominations() {
                     style={animationStyles.fadeInUpFast}
                   >
                     <div className="moviePoster">
-                      <img
-                        src={nominie.info.poster}
-                        alt={`Poster of the movie ${nominie.info.Title} from the year ${nominie.info.year}`}
-                      />
+                      {nominie.info.poster !== "N/A" ? (
+                        <img
+                          src={nominie.info.poster}
+                          alt={`Poster of the movie ${nominie.info.movieTitle} from the year ${nominie.info.year}`}
+                        />
+                      ) : (
+                        <img
+                          src={StockPoster}
+                          alt={`Poster of the movie ${nominie.info.movieTitle} from the year ${nominie.info.year}`}
+                        />
+                      )}
                     </div>
                     <div className="movieInfo">
                       <div className="movieTitle">

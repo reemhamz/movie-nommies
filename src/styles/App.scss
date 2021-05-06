@@ -5,6 +5,7 @@
 @import "./movieSearch";
 @import "./movieResults";
 @import "./nominations";
+@import "./footer";
 
 body {
 background: linear-gradient(to top, #cc5333, #23074d); 
@@ -12,7 +13,7 @@ background: linear-gradient(to top, #cc5333, #23074d);
 
 .App {
   background-color: $white;
-  min-height: 110vh;
+  min-height: 120vh;
   position: relative;
 }
 

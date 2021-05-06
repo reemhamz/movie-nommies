@@ -1,23 +1,20 @@
-import React, { createContext, useState } from "react";
+import React from "react";
 import "./styles/App.scss";
 
 import Hero from "./components/Hero";
 import Nominations from "./components/Nominations";
-import NominationContextProvider from "./components/context/NominationContext"
 import MovieSearch from "./components/MovieSearch";
-import ApiCall from "./components/ApiCall";
+import Footer from "./components/Footer";
 
 function App() {
-  
   return (
     <div className="App wrapper">
-      <NominationContextProvider>
-        <Hero />
-        <main>
-          <Nominations />
-          <MovieSearch />
-        </main>
-      </NominationContextProvider>
+      <Hero />
+      <main>
+        <Nominations />
+        <MovieSearch />
+      </main>
+      <Footer />
     </div>
   );
 }

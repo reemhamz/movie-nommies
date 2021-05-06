@@ -7,9 +7,6 @@ import axios from "axios";
 import firebase from "./FirebaseCall";
 import "firebase/database";
 
-// importing context for state management
-import { NominationContext } from "./context/NominationContext";
-
 // importing icons
 import { Ticket, Info } from "phosphor-react";
 
@@ -17,11 +14,13 @@ import { Ticket, Info } from "phosphor-react";
 import { StyleRoot } from "radium";
 import { animationStyles } from "./animationConfig";
 
+// importing stock image for missing movie posters
+import StockPoster from "../assets/stockPhoto.jpg";
 
 function ApiCall(props) {
   // Component states
   const [movieList, setMovieList] = useState([]);
-  const { nominationArray, setNominationArray } = useContext(NominationContext);
+  const [imdbIDArray, setIMDBArray] = useState([]);
 
   // API dependencies
   const apiKey = "43090bb1";
@@ -66,7 +65,7 @@ function ApiCall(props) {
         movieArray.push({ key: key, info: movieData[key] });
       }
       movieArray.map((movie) => movieIDArray.push(movie.info.imdbID));
-      setNominationArray(movieIDArray);
+      setIMDBArray(movieIDArray);
     });
   }, []);
 
@@ -85,10 +84,17 @@ function ApiCall(props) {
                       style={animationStyles.fadeInUpSlow}
                     >
                       <div className="moviePoster">
-                        <img
-                          src={movieInfo.Poster}
-                          alt={`Poster of the movie ${movieInfo.Title} from the year ${movieInfo.Year}`}
-                        />
+                        {movieInfo.Poster !== "N/A" ? (
+                          <img
+                            src={movieInfo.Poster}
+                            alt={`Poster of the movie ${movieInfo.Title} from the year ${movieInfo.Year}`}
+                          />
+                        ) : (
+                          <img
+                            src={StockPoster}
+                            alt={`Poster of the movie ${movieInfo.Title} from the year ${movieInfo.Year}`}
+                          />
+                        )}
                       </div>
                       <div className="movieInfo">
                         <div className="movieTitle">
@@ -103,8 +109,8 @@ function ApiCall(props) {
                             onClick={() => nominateMovie(movieInfo)}
                             aria-label="nominate movie"
                             disabled={
-                              nominationArray.includes(movieInfo.imdbID) ||
-                              nominationArray.length >= 5
+                              imdbIDArray.includes(movieInfo.imdbID) ||
+                              imdbIDArray.length >= 5
                             }
                           >
                             <Ticket size={30} />
