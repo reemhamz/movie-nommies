@@ -6,7 +6,7 @@
   // width: 40%;
   position: relative;
   .banner {
-    width: 60%;
+    width: 80%;
     font-size: 2rem;
     text-align: center;
     margin: 20px auto;
@@ -80,6 +80,11 @@
 @include max-width(870) {
   .nominationsList {
     width: 60% !important;
+  }
+  .banner {
+    span {
+      width: 100%;
+    }
   }
 }
 

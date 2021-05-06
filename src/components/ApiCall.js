@@ -24,7 +24,7 @@ function ApiCall(props) {
 
   // API dependencies
   const apiKey = "43090bb1";
-  const dataUrl = `http://www.omdbapi.com/?s=&apikey=${apiKey}&`;
+  const dataUrl = `https://www.omdbapi.com/?s=&apikey=${apiKey}&`;
 
   // firebase reference
   const dbRef = firebase.database().ref();
