@@ -13,6 +13,11 @@ import { NominationContext } from "./context/NominationContext";
 // importing icons
 import { Ticket, Info } from "phosphor-react";
 
+// importing stuff for animation
+import { StyleRoot } from "radium";
+import { animationStyles } from "./animationConfig";
+
+
 function ApiCall(props) {
   // Component states
   const [movieList, setMovieList] = useState([]);
@@ -21,7 +26,8 @@ function ApiCall(props) {
   // API dependencies
   const apiKey = "43090bb1";
   const dataUrl = `http://www.omdbapi.com/?s=&apikey=${apiKey}&`;
-  const posterUrl = `http://img.omdbapi.com/?s=apikey=${apiKey}&`;
+
+  // firebase reference
   const dbRef = firebase.database().ref();
 
   useEffect(() => {
@@ -67,49 +73,58 @@ function ApiCall(props) {
   return (
     <div className="ApiCall">
       <div className="moviesResult">
-        <ul className="moviesResultList">
-          {movieList !== undefined &&
-            movieList.map((movieInfo, index) => {
-              if (movieInfo.Type === "movie") {
-                return (
-                  <li className="moviesResultListItem" key={index}>
-                    <div className="moviePoster">
-                      <img
-                        src={movieInfo.Poster}
-                        alt={`Poster of the movie ${movieInfo.Title} from the year ${movieInfo.Year}`}
-                      />
-                    </div>
-                    <div className="movieInfo">
-                      <div className="movieTitle">
-                        <h3>{movieInfo.Title}</h3>
+        <StyleRoot>
+          <ul className="moviesResultList">
+            {movieList !== undefined &&
+              movieList.map((movieInfo, index) => {
+                if (movieInfo.Type === "movie") {
+                  return (
+                    <li
+                      className="moviesResultListItem"
+                      key={index}
+                      style={animationStyles.fadeInUpSlow}
+                    >
+                      <div className="moviePoster">
+                        <img
+                          src={movieInfo.Poster}
+                          alt={`Poster of the movie ${movieInfo.Title} from the year ${movieInfo.Year}`}
+                        />
                       </div>
-                      <div className="movieYear">
-                        <span>Year:</span>
-                        <h4>{movieInfo.Year}</h4>
+                      <div className="movieInfo">
+                        <div className="movieTitle">
+                          <h3>{movieInfo.Title}</h3>
+                        </div>
+                        <div className="movieYear">
+                          <span>Year:</span>
+                          <h4>{movieInfo.Year}</h4>
+                        </div>
+                        <div className="movieButtons">
+                          <button
+                            onClick={() => nominateMovie(movieInfo)}
+                            aria-label="nominate movie"
+                            disabled={
+                              nominationArray.includes(movieInfo.imdbID) ||
+                              nominationArray.length >= 5
+                            }
+                          >
+                            <Ticket size={30} />
+                          </button>
+                          <a
+                            href={`https://imdb.com/title/${movieInfo.imdbID}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="view movie information"
+                          >
+                            <Info size={30} />
+                          </a>
+                        </div>
                       </div>
-                      <div className="movieButtons">
-                        <button
-                          onClick={() => nominateMovie(movieInfo)}
-                          aria-label="nominate movie"
-                          disabled={nominationArray.includes(movieInfo.imdbID) || nominationArray.length>=5}
-                        >
-                          <Ticket size={30} />
-                        </button>
-                        <a
-                          href={`https://imdb.com/title/${movieInfo.imdbID}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label="view movie information"
-                        >
-                          <Info size={30} />
-                        </a>
-                      </div>
-                    </div>
-                  </li>
-                );
-              }
-            })}
-        </ul>
+                    </li>
+                  );
+                }
+              })}
+          </ul>
+        </StyleRoot>
       </div>
     </div>
   );

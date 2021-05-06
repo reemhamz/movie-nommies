@@ -14,8 +14,8 @@ function App() {
       <NominationContextProvider>
         <Hero />
         <main>
-          <MovieSearch />
           <Nominations />
+          <MovieSearch />
         </main>
       </NominationContextProvider>
     </div>

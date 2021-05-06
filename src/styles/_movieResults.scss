@@ -63,24 +63,18 @@
       background: $darkPurple;
       color: white;
       font-size: 40px;
-      font-weight: 600;
-      color: rgba(255, 255, 255, 0.95);
       width: 80px;
       height: 48px;
-      background-image: url("https://s5.postimg.cc/wfaq3xlab/texture.png");
       text-align: center;
       border-radius: 10px;
-      box-shadow: 0 18px 15px -10px rgba($darkPurple, 0.5),
-        0 18px 15px -10px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 18px 15px -10px rgba($darkPurple, 0.5);
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
       transition: 0.3s ease-in-out;
       &:hover {
-        background: $mediumPurple;
-        box-shadow: 0 18px 15px -10px rgba($mediumPurple, 0.5),
-          0 18px 15px -10px rgba(0, 0, 0, 0.05);
+        background: rgba($darkPurple, 0.7);
       }
       &[disabled] {
-        background:$lightGrey;
+        background: $lightGrey;
         box-shadow: none;
         border: 0;
         cursor: not-allowed;

@@ -24,7 +24,8 @@ function Hero() {
             <span aria-label="information">
               <Info size={20} />
             </span>{" "}
-            icon.
+            icon. You can only nominate 5 movies at a time. Make 'em count!{" "}
+            <span aria-hidden="true">🤞🏼</span>
           </h2>
         </div>
         <div className="heroImage"></div>
