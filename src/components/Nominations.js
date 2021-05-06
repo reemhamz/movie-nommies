@@ -31,7 +31,7 @@ function Nominations() {
   // remove movie from nomination list
   const removeMovie = (movieID) => {
     dbRef.child(movieID).remove();
-  }
+  };
 
   useEffect(() => {
     // variable holding reference to our database hosted on Firebase
@@ -42,12 +42,11 @@ function Nominations() {
         dataArray.push({ key: key, info: movieData[key] });
       }
       setNominies(dataArray);
-      console.log(dataArray);
 
       // displays banner when the maximum of 5 movies have been selected
       dataArray.length === 5 && setToggleBanner(false);
 
-      dataArray.length === 0 && setModalOpen(false)
+      dataArray.length === 0 && setModalOpen(false);
     });
   }, []);
 
