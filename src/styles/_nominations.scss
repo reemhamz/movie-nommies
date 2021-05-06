@@ -3,7 +3,6 @@
   top: 0;
   right: 0;
   overflow: auto;
-  // width: 40%;
   position: relative;
   .banner {
     width: 80%;
@@ -52,7 +51,6 @@
     transition: 0.3s;
     display: flex;
     flex-direction: column;
-    // align-items: center;
     padding-bottom: 20px;
     .closeButton {
       cursor: pointer;
@@ -66,7 +64,6 @@
       margin-bottom: 20px;
     }
     .nommiesListItem {
-      // width: 80% !important;
       flex-shrink: 0;
 
       background: $white;

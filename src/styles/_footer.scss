@@ -1,7 +1,6 @@
 footer {
     position: fixed;
     bottom: 0;
-    // left: 0;
     width: inherit;
     display: block;
     padding: 12px;
@@ -15,5 +14,13 @@ footer {
     }
     a{
         text-decoration: underline;
+    }
+}
+
+// responsive CSS
+
+@include max-width(680){
+    footer {
+        font-size: 1.3rem;
     }
 }

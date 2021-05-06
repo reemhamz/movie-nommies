@@ -21,7 +21,7 @@ function Hero() {
             <span aria-label="ticket">
               <Ticket size={20} />
             </span>{" "}
-            icon. View movie's IMDB page using{" "}
+            icon. View movie's IMDB page using the{" "}
             <span aria-label="information">
               <Info size={20} />
             </span>{" "}
