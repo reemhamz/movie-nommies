@@ -16,6 +16,7 @@
     display: flex;
     flex-direction: column;
     width: 60%;
+    // background: blue;
   }
   .heroImage {
     background-image: url("../assets/movieCamera.png");
@@ -23,5 +24,26 @@
     height: 300px;
     width: 360px;
     object-fit: cover;
+  }
+}
+
+// responsive CSS
+
+@include max-width(900) {
+  .heroTitles {
+    display: flex;
+    flex-direction: column;
+  }
+  .headings {
+    flex-direction: column;
+    width: 95% !important;
+  }
+
+  .heroImage {
+    width: 100% !important;
+    margin-bottom: 40px;
+    object-fit: cover;
+    background-size: contain !important;
+    background-repeat: no-repeat;
   }
 }

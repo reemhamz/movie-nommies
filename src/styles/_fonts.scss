@@ -75,3 +75,31 @@ a {
   color: inherit;
   display: block;
 }
+
+// responsive CSS 
+
+@include max-width(900){
+  h1 {
+    flex-direction: column;
+    .tinyHeader {
+      align-self: flex-start;
+      margin-bottom: 20px;
+    }
+    .largeHeader {
+      font-size: 6rem;
+    }
+  }
+  h2 {
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 40px;
+  }
+}
+
+@include max-width(540){
+  h1 {
+    .largeHeader {
+      font-size: 4rem;
+    }
+  }
+}

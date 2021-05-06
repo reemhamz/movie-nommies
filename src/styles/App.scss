@@ -1,5 +1,6 @@
 @import "./setup";
 @import "./colors";
+@import "./breakpoints";
 @import "./fonts";
 @import "./hero";
 @import "./movieSearch";
@@ -8,7 +9,7 @@
 @import "./footer";
 
 body {
-background: linear-gradient(to top, #cc5333, #23074d); 
+  background: linear-gradient(to top, #cc5333, #23074d);
 }
 
 .App {

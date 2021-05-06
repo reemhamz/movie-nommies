@@ -1,0 +1,15 @@
+@function bp($v) {
+  @return map-get($breakpoints, $v);
+}
+
+@mixin min-width($w) {
+  @media only screen and (min-width: ($w / 16) + em) {
+    @content;
+  }
+}
+
+@mixin max-width($w) {
+  @media only screen and (max-width: (($w - 1) / 16) + em) {
+    @content;
+  }
+}

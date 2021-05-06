@@ -83,3 +83,41 @@
     }
   }
 }
+
+// responsive CSS 
+
+@include max-width(805){
+  .moviesResultListItem{
+    width: 70%;
+  }
+}
+
+@include max-width(520){
+  .moviesResultListItem{
+    width: 100%;
+    height: 290px;
+  }
+}
+
+@include max-width(440){
+  .moviesResultListItem {
+    flex-direction: column;
+    height: 360px;
+    .moviePoster {
+      width: 100%;
+      height: 40%;
+    }
+    .movieInfo {
+      width: 100%;
+    }
+    .movieButtons {
+      width: 100%;
+      justify-content: space-around;
+      align-items: center;
+      button,
+      a {
+        margin-top: 10px ;
+      }
+    }
+  }
+}
