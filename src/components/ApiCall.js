@@ -6,12 +6,8 @@ import { NominationsContext } from "./context/NominationsContext";
 // importing axios for API call
 import axios from "axios";
 
-// importing firebase
-import firebase from "./FirebaseCall";
-import "firebase/database";
-
 // importing icons
-import { Ticket, Info, Copy } from "phosphor-react";
+import { Ticket, Info } from "phosphor-react";
 
 // importing stuff for animation
 import { StyleRoot } from "radium";
@@ -23,7 +19,7 @@ import StockPoster from "../assets/stockPhoto.jpg";
 function ApiCall(props) {
   // Component states
   const [movieList, setMovieList] = useState([]);
-  const [movieStorage, setMovieStorage] = useState([]);
+  // const [movieStorage, setMovieStorage] = useState([]);
 
   // defining context so we can use it in this file
   const { nominations, setNominations } = useContext(NominationsContext);
@@ -31,9 +27,6 @@ function ApiCall(props) {
   // API dependencies
   const apiKey = "43090bb1";
   const dataUrl = `https://www.omdbapi.com/?s=&apikey=${apiKey}&`;
-
-  // firebase reference
-  const dbRef = firebase.database().ref();
 
   useEffect(() => {
     // HTTPS request to API (OMDB)
@@ -52,26 +45,24 @@ function ApiCall(props) {
       });
   }, [props.movieSearchProp]);
 
+
+  // function that adds movies into our localstorage depending on the movie we select
   const nominateMovie = (movieID) => {
-    // push to firebase
-    // dbRef.push({
-    //   movieName: movieID.Title,
-    //   year: movieID.Year,
-    //   poster: movieID.Poster,
-    //   imdbID: movieID.imdbID,
-    // });
 
-    // localStorage.setItem("nominations", JSON.stringify(movieID));
+    // adding the movie into our localstorage 
+    const movieStorage = localStorage.getItem("nominations");
     const currentNominations =
-      JSON.parse(localStorage.getItem("nominations")) || [];
+      movieStorage !== null ? JSON.parse(movieStorage) : [];
 
+    // what to push into the local storage
     const newNomination = {
       movieName: movieID.Title,
       year: movieID.Year,
       poster: movieID.Poster,
       imdbID: movieID.imdbID,
     };
-
+    
+    //pushing our new nomination into datastorage
     currentNominations.push(newNomination);
     localStorage.setItem("nominations", JSON.stringify(currentNominations));
 
@@ -85,23 +76,6 @@ function ApiCall(props) {
     }
   }, []);
 
-  useEffect(() => {
-    dbRef.on("value", (response) => {
-      const movieData = response.val();
-      const movieArray = [];
-      const movieIDArray = [];
-
-      //
-      for (let key in movieData) {
-        movieArray.push({ key: key, info: movieData[key] });
-      }
-      nominations.map((movie) => movieIDArray.push(movie.imdbID));
-      console.log(movieArray)
-      // using localstorage to save nominated movies
-      localStorage.setItem("nominations", JSON.stringify(movieArray));
-    });
-  }, []);
-
   return (
     <div className="ApiCall">
       <div className="moviesResult">
@@ -109,6 +83,7 @@ function ApiCall(props) {
           <ul className="moviesResultList">
             {movieList !== undefined &&
               movieList.map((movieInfo, index) => {
+                console.log(nominations.includes(movieInfo.imdbID));
                 if (movieInfo.Type === "movie") {
                   return (
                     <li
@@ -142,8 +117,8 @@ function ApiCall(props) {
                             onClick={() => nominateMovie(movieInfo)}
                             aria-label="nominate movie"
                             disabled={
-                              nominations.includes(movieInfo.imdbID) ||
-                              nominations.length >= 5
+                              nominations.length === 5 ||
+                              nominations.includes(movieInfo.imdbID) === true
                             }
                           >
                             <Ticket size={30} />
