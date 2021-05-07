@@ -1,4 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+
+// importing react context provider
+import { NominationsContext } from "./context/NominationsContext";
 
 // importing axios for API call
 import axios from "axios";
@@ -8,7 +11,7 @@ import firebase from "./FirebaseCall";
 import "firebase/database";
 
 // importing icons
-import { Ticket, Info } from "phosphor-react";
+import { Ticket, Info, Copy } from "phosphor-react";
 
 // importing stuff for animation
 import { StyleRoot } from "radium";
@@ -20,7 +23,10 @@ import StockPoster from "../assets/stockPhoto.jpg";
 function ApiCall(props) {
   // Component states
   const [movieList, setMovieList] = useState([]);
-  const [imdbIDArray, setIMDBArray] = useState([]);
+  const [movieStorage, setMovieStorage] = useState([]);
+
+  // defining context so we can use it in this file
+  const { nominations, setNominations } = useContext(NominationsContext);
 
   // API dependencies
   const apiKey = "43090bb1";
@@ -48,24 +54,51 @@ function ApiCall(props) {
 
   const nominateMovie = (movieID) => {
     // push to firebase
-    dbRef.push({
+    // dbRef.push({
+    //   movieName: movieID.Title,
+    //   year: movieID.Year,
+    //   poster: movieID.Poster,
+    //   imdbID: movieID.imdbID,
+    // });
+
+    // localStorage.setItem("nominations", JSON.stringify(movieID));
+    const currentNominations =
+      JSON.parse(localStorage.getItem("nominations")) || [];
+
+    const newNomination = {
       movieName: movieID.Title,
       year: movieID.Year,
       poster: movieID.Poster,
       imdbID: movieID.imdbID,
-    });
+    };
+
+    currentNominations.push(newNomination);
+    localStorage.setItem("nominations", JSON.stringify(currentNominations));
+
+    setNominations(JSON.parse(localStorage.getItem("nominations")));
   };
+
+  useEffect(() => {
+    const data = localStorage.getItem("nominations");
+    if (data) {
+      setNominations(JSON.parse(data));
+    }
+  }, []);
 
   useEffect(() => {
     dbRef.on("value", (response) => {
       const movieData = response.val();
       const movieArray = [];
       const movieIDArray = [];
+
+      //
       for (let key in movieData) {
         movieArray.push({ key: key, info: movieData[key] });
       }
-      movieArray.map((movie) => movieIDArray.push(movie.info.imdbID));
-      setIMDBArray(movieIDArray);
+      nominations.map((movie) => movieIDArray.push(movie.imdbID));
+      console.log(movieArray)
+      // using localstorage to save nominated movies
+      localStorage.setItem("nominations", JSON.stringify(movieArray));
     });
   }, []);
 
@@ -109,8 +142,8 @@ function ApiCall(props) {
                             onClick={() => nominateMovie(movieInfo)}
                             aria-label="nominate movie"
                             disabled={
-                              imdbIDArray.includes(movieInfo.imdbID) ||
-                              imdbIDArray.length >= 5
+                              nominations.includes(movieInfo.imdbID) ||
+                              nominations.length >= 5
                             }
                           >
                             <Ticket size={30} />

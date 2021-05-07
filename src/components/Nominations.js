@@ -1,4 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+
+// importing react context provider
+import { NominationsContext } from "./context/NominationsContext";
 
 // importing Firebase to be used for modal
 import firebase from "./FirebaseCall";
@@ -18,19 +21,23 @@ function Nominations() {
   // firebase reference
   const dbRef = firebase.database().ref();
 
-  // state variables
+  // Component states
   const [nominies, setNominies] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [toggleBanner, setToggleBanner] = useState(false);
 
+  // defining context so we can use it in this file
+  const { nominations, setNominations } = useContext(NominationsContext);
   // toggle modal to open and close
+  
   const toggleModal = () => {
     setModalOpen(!modalOpen);
   };
 
   // remove movie from nomination list
   const removeMovie = (movieID) => {
-    dbRef.child(movieID).remove();
+    // dbRef.child(movieID).remove();
+    localStorage.removeItem("nominations", JSON.stringify(movieID));
   };
 
   useEffect(() => {
@@ -44,9 +51,9 @@ function Nominations() {
       setNominies(dataArray);
 
       // displays banner when the maximum of 5 movies have been selected
-      dataArray.length === 5 && setToggleBanner(false);
+      nominations.length === 5 && setToggleBanner(false);
 
-      dataArray.length === 0 && setModalOpen(false);
+      nominations.length === 0 && setModalOpen(false);
     });
   }, []);
 
@@ -59,8 +66,8 @@ function Nominations() {
 
   return (
     <div className="Nominations">
-      {nominies.length === 5 && (
-        <div class="banner">
+      {nominations.length === 5 && (
+        <div className="banner">
           <span>
             You've reached the max amount of movies! Go into the nominations
             list and delete a movie to nominate another.
@@ -74,52 +81,52 @@ function Nominations() {
       <StyleRoot>
         {modalOpen && (
           <ul className="nominationsList" style={animationStyles.slideInRight}>
-            <button class="closeButton">
+            <button className="closeButton">
               <XSquare
                 size={48}
                 color="white"
                 onClick={() => setModalOpen(false)}
               />
             </button>
-            {nominies.length >= 1 &&
-              nominies.map((nominie, index) => {
+            {nominations.length >= 1 &&
+              nominations.map((nominie, index) => {
+                // console.log(nominie)
                 return (
                   <li
                     className=" nommiesListItem"
                     key={index}
                     style={animationStyles.fadeInUpFast}
                   >
-                    <div className="moviePoster">
-                      {nominie.info.poster !== "N/A" ? (
+                     <div className="moviePoster">
+                      {nominie.poster !== "N/A" ? (
                         <img
-                          src={nominie.info.poster}
-                          alt={`Poster of the movie ${nominie.info.movieTitle} from the year ${nominie.info.year}`}
+                          src={nominie.poster}
+                          alt={`Poster of the movie ${nominie.movieName} from the year ${nominie.year}`}
                         />
                       ) : (
                         <img
                           src={StockPoster}
-                          alt={`Poster of the movie ${nominie.info.movieTitle} from the year ${nominie.info.year}`}
+                          alt={`Poster of the movie ${nominie.movieName} from the year ${nominie.year}`}
                         />
                       )}
                     </div>
                     <div className="movieInfo">
                       <div className="movieTitle">
-                        <h3>{nominie.info.movieName}</h3>
+                        <h3>{nominie.movieName}</h3>
                       </div>
                       <div className="movieYear">
                         <span>Year:</span>
-                        <h4>{nominie.info.year}</h4>
+                        <h4>{nominie.year}</h4>
                       </div>
                       <div className="movieButtons">
                         <button
-                          onClick={() => removeMovie(nominie.key)}
+                          onClick={() => removeMovie(nominie.imdbID)}
                           aria-label="remove movie from nominations"
                         >
                           <Trash size={30} />
                         </button>
-
                         <a
-                          href={`https://imdb.com/title/${nominie.info.imdbID}`}
+                          href={`https://imdb.com/title/${nominie.imdbID}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label="view movie information"
@@ -127,7 +134,7 @@ function Nominations() {
                           <Info size={30} />
                         </a>
                       </div>
-                    </div>
+                    </div> 
                   </li>
                 );
               })}

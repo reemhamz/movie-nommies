@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer class="wrapper">
+    <footer className="wrapper">
       <span>
         <a href="https://reemify.dev" target="_blank" rel="noopener noreferrer">
           Reem's{" "}

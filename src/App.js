@@ -5,16 +5,19 @@ import Hero from "./components/Hero";
 import Nominations from "./components/Nominations";
 import MovieSearch from "./components/MovieSearch";
 import Footer from "./components/Footer";
+import NominationsContextProvider from "./components/context/NominationsContext"
 
 function App() {
   return (
     <div className="App wrapper">
-      <Hero />
-      <main>
-        <Nominations />
-        <MovieSearch />
-      </main>
-      <Footer />
+      <NominationsContextProvider>
+        <Hero />
+        <main>
+          <Nominations />
+          <MovieSearch />
+        </main>
+        <Footer />
+      </NominationsContextProvider>
     </div>
   );
 }
