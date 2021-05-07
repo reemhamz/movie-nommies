@@ -46,16 +46,17 @@
     position: fixed;
     top: 0;
     right: 0;
-    width: 35%;
-    background: rgba($darkOrange, 0.8);
+    width: 27%;
+    background: rgba($black, 0.3);
     transition: 0.3s;
     display: flex;
+    align-items: center;
     flex-direction: column;
     padding-bottom: 20px;
     .closeButton {
       cursor: pointer;
       display: inline-block;
-      margin-right: auto;
+      align-self: flex-start;
       background: $darkOrange;
       border-radius: 6px;
       border: 0;
@@ -66,7 +67,8 @@
     .nommiesListItem {
       flex-shrink: 0;
       background: $white;
-      width: 90%;
+      width: 95%;
+      margin: 20px 0 !important;
     }
   }
 }

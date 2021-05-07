@@ -20,6 +20,14 @@ body {
 
 .wrapper {
   max-width: 1080px;
-  width: 95%;
+  width: 85%;
   margin: 0 auto;
+}
+
+// responsive CSS
+
+@include max-width(600) {
+  .wrapper {
+    width: 100%;
+  }
 }

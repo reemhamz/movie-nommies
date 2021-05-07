@@ -16,6 +16,8 @@ const Footer = () => {
           Shopify's Shoppies
         </a>{" "}
         challenge. Challenge accepted in 2021 <span aria-hidden="true">🤘🏼</span>
+        {" "} Header image by{" "}
+        <a href="https://dribbble.com/RazvanVezeteu?page=2">Razvan</a>.
       </span>
     </footer>
   );
