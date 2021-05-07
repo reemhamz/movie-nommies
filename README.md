@@ -1,68 +1,73 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<img src="/src/assets/titleShot.png" alt="Title of the site in black and yellow, saying 'The Movie Nommies'">
+# The Movie Nommies 🍿
+  A take on Shopify's 'Shoppies' challenge.
 
-## Available Scripts
+## Challenge description 🧠
+Use the [OMDB](http://www.omdbapi.com/) API to search for movies, and allow the user to nominate a maximum of 5 movies. Once they've reached the cap, they should be notified.
 
-In the project directory, you can run:
+## Challenge requirements 🧗🏻‍♀️
+- Search results should come from OMDB's API (free API key: http://www.omdbapi.com/apikey.aspx).
+- Each search result should list at least its title, year of release and a button to nominate that film.
+- Updates to the search terms should update the result list
+- Movies in search results can be added and removed from the nomination list.
+- If a search result has already been nominated, disable its nominate button.
+- Display a banner when the user has 5 nominations.
 
-### `yarn start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## About my take 🎉
+I actually began this challenge in September of 2020 for the January 2021 internship. At that point, I only worked on the header, but was too anxious to continue on (imposter syndrome at its finest). However, I was on a mission to actually complete the task this time around, and was proud of myself for doing so.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+I built the project using React.js due to my familiarity with it, and because it's my favourite library to use when consuming and displaying API data. I used its Context API to have a persistent state throughout the lifecycle of the app, enabling a better way to pass data between components.
 
-### `yarn test`
+I used SASS as my CSS extension due to its modularity, functions (used for mixins and media queries), and variables (used for colours and fonts)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Tech stack 🥞
+- [React](https://reactjs.org/)
+  - [Hooks (useEffect, useState)](https://reactjs.org/docs/hooks-intro.html)
+  - [Context API](https://reactjs.org/docs/context.html#gatsby-focus-wrapper)
+- [SASS (styling)](https://sass-lang.com/)
+- [react-animations](https://www.npmjs.com/package/react-animations)
+- [Phosphor Icons](https://phosphoricons.com/)
+- [Local Storage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
+- [Axios (API fetching)](https://www.npmjs.com/package/axios)
+- [Netlify (deploy & hosting)](https://www.netlify.com/)
+  
+---
+🚨**Note:**
 
-### `yarn build`
+At first I did use Firebase instead of LocalStorage, however quickly realized it wasn't as user-friendly, since users were able to see nominations straight from the database rather than their own on page load. Not to mention anyone was able to see another nominate and delete movies.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### Layout
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Header & description
+I wanted to make the web app as simple as possible. I included a small description in the header describing how a user is to search, nominate, and delete a movie. I also added a little fun treat of allowing the user to quickly hop into the movie's [Imdb](https://www.imdb.com/) page. I also added a button that would open and close the nominations modal for easy access.
 
-### `yarn eject`
+<img src="./src/assets/pageShot.png" src="The title of the page,an illustration of a purple film camera, the description of the site detailing how to use it, a purple button that says 'view nomination list', and the search bar">
+(header image by <a href="https://dribbble.com/RazvanVezeteu?page=2">Razvan</a>)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+<br />
+<br />
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Movie searches
+The search results will display dynamically, meaning they will change upon whatever the user types per letter.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+I made the movies show as 3-dimensional-ish cards that have the movie title, release year, nomination button, and Imdb button.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+<img src="/src/assets/searchShot.png" alt ="results of the movie search -- showcasing the Twilight Saga">
+Yeah I like Twilight, so what?! 👀
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Nomination modal
+The nomination modal will be opened on page load _if_ there are already movies the local users has nominated previously. If there are none, then the modal won't load on page load.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+To view nominations, the user can click on the button above that says `Open nomination list`, and can close it clicking the same button (which at that point will say `Close nomination list`)
 
-### Code Splitting
+Once a user nominates a movie, the modal will automatically open showing an animation of a movie sliding up and being nominated (fun!).
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+If the user chooses to delete all the movies they've nominated, then the modal will automatically close.
 
-### Analyzing the Bundle Size
+I decided to make the nomination list appear in a small modal with a clear background, with a button on top that can also close it, and the user can also press the `esc` key to close it!
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+<img src="/src/assets/nominationShot.png" src="results list, with the nominations modal slightly above it on the right">
