@@ -17,6 +17,7 @@ import { animationStyles } from "./animationConfig";
 import StockPoster from "../assets/stockPhoto.jpg";
 
 function ApiCall(props) {
+  
   // Component states
   const [movieList, setMovieList] = useState([]);
   // const [movieStorage, setMovieStorage] = useState([]);
@@ -45,11 +46,9 @@ function ApiCall(props) {
       });
   }, [props.movieSearchProp]);
 
-
   // function that adds movies into our localstorage depending on the movie we select
   const nominateMovie = (movieID) => {
-
-    // adding the movie into our localstorage 
+    // adding the movie into our localstorage
     const movieStorage = localStorage.getItem("nominations");
     const currentNominations =
       movieStorage !== null ? JSON.parse(movieStorage) : [];
@@ -61,7 +60,7 @@ function ApiCall(props) {
       poster: movieID.Poster,
       imdbID: movieID.imdbID,
     };
-    
+
     //pushing our new nomination into datastorage
     currentNominations.push(newNomination);
     localStorage.setItem("nominations", JSON.stringify(currentNominations));
@@ -83,7 +82,6 @@ function ApiCall(props) {
           <ul className="moviesResultList">
             {movieList !== undefined &&
               movieList.map((movieInfo, index) => {
-                console.log(nominations.includes(movieInfo.imdbID));
                 if (movieInfo.Type === "movie") {
                   return (
                     <li
@@ -118,7 +116,13 @@ function ApiCall(props) {
                             aria-label="nominate movie"
                             disabled={
                               nominations.length === 5 ||
-                              nominations.includes(movieInfo.imdbID) === true
+                              // button disables if the nominations array already includes the movie we selected
+                              nominations.includes(
+                                nominations.find(
+                                  (nomination) =>
+                                    nomination.imdbID === movieInfo.imdbID
+                                )
+                              )
                             }
                           >
                             <Ticket size={30} />

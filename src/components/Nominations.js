@@ -14,15 +14,13 @@ import { animationStyles } from "./animationConfig";
 import StockPoster from "../assets/stockPhoto.jpg";
 
 function Nominations() {
-  
   // Component states
   const [modalOpen, setModalOpen] = useState(false);
-  const [toggleBanner, setToggleBanner] = useState(false);
 
   // defining context so we can use it in this file
   const { nominations, setNominations } = useContext(NominationsContext);
-  // toggle modal to open and close
 
+  // toggle modal to open and close
   const toggleModal = () => {
     setModalOpen(!modalOpen);
   };
@@ -38,10 +36,23 @@ function Nominations() {
   };
 
   useEffect(() => {
-    console.log(nominations.length);
-    // nominations.length === 5 && setToggleBanner(false);
+    // If there are no movies nominated, modal won't automatically load, but if there are movies, it will load.
     nominations.length === 0 ? setModalOpen(false) : setModalOpen(true);
-  },[nominations])
+
+    // modal will close when user presses escape key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        setModalOpen(false);
+      }
+    });
+    return () => {
+      document.removeEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          setModalOpen(false);
+        }
+      });
+    };
+  }, [nominations]);
 
   return (
     <div className="Nominations">
@@ -53,6 +64,7 @@ function Nominations() {
           </span>
         </div>
       )}
+
       <button onClick={toggleModal} className="nominationsToggle">
         {!modalOpen ? <> View nomination list</> : <> Close nomination list</>}
       </button>

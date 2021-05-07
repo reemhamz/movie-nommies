@@ -44,24 +44,26 @@ h1 {
     line-height: 0.9;
     position: relative;
     color: $gold;
+    text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
     z-index: 0;
     &::before {
       content: "MOVIE NOMMIES";
       position: absolute;
-      bottom: 5px;
-      right: 5px;
-      text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
-      z-index: 1;
+      top: 5px;
+      left: 5px;
+      text-shadow: none;
+      z-index: -1;
     }
   }
 }
 
 h2 {
   font-size: 1.8rem;
-  font-family: $Noto;
-  margin-left: 20px;
+  font-family: $Apple;
+  // margin-left: 20px;
+  font-weight: 400;
   margin-top: 20px;
-  width: 80%;
+  width: 100%;
 }
 
 h3 {
@@ -76,9 +78,9 @@ a {
   display: block;
 }
 
-// responsive CSS 
+// responsive CSS
 
-@include max-width(900){
+@include max-width(900) {
   h1 {
     flex-direction: column;
     .tinyHeader {
@@ -96,7 +98,7 @@ a {
   }
 }
 
-@include max-width(540){
+@include max-width(540) {
   h1 {
     .largeHeader {
       font-size: 4rem;

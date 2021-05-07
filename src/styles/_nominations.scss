@@ -30,7 +30,7 @@
     border-radius: 10px;
     transition: 0.3s;
     margin: 0 auto;
-    width: 200px;
+    width: 260px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -65,7 +65,6 @@
     }
     .nommiesListItem {
       flex-shrink: 0;
-
       background: $white;
       width: 90%;
     }
