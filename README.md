@@ -109,5 +109,6 @@ When the user nominates 5 movies, nomination buttons on all movies will be disab
 <img src="/src/assets/limitShot.png" alt="header of the page displaying an orange banner that says 'You've reached the max amount of movies! Go into the nominations list and delete a movie to nominate another.'">
 
 ### Responsive design
-The website is also fully functional on tablet and mobile devices. 
+The website is also fully functional on tablet and mobile devices.
+ 
 <img src="/src/assets/mobileShot.jpeg" alt="Mobile friendly version of website header." width="200">
