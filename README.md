@@ -107,3 +107,7 @@ I decided to make the nomination list appear in a small modal with a clear backg
 When the user nominates 5 movies, nomination buttons on all movies will be disabled, and a banner will appear on top of the page notifying the user. However, user can reverse the disabled buttons by deleting one movie from the nomination list.
 
 <img src="/src/assets/limitShot.png" alt="header of the page displaying an orange banner that says 'You've reached the max amount of movies! Go into the nominations list and delete a movie to nominate another.'">
+
+### Responsive design
+The website is also fully functional on tablet and mobile devices. 
+<img src="/src/assets/mobileDemo.gif" alt="gif using mobile demo of this challenge. Adding Twilight movies to nomination list then removing them.">
