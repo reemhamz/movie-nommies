@@ -8,7 +8,7 @@ import { Info, Trash, XSquare } from "phosphor-react";
 
 // importing stuff for animation
 import { StyleRoot } from "radium";
-import { animationStyles } from "./animationConfig";
+import { animationStyles } from "./AnimationConfig";
 
 // importing stock image for missing movie posters
 import StockPoster from "../assets/stockPhoto.jpg";
