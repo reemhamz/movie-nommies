@@ -110,4 +110,4 @@ When the user nominates 5 movies, nomination buttons on all movies will be disab
 
 ### Responsive design
 The website is also fully functional on tablet and mobile devices. 
-<img src="/src/assets/mobileDemo.gif" alt="gif using mobile demo of this challenge. Adding Twilight movies to nomination list then removing them.">
+<img src="/src/assets/mobileShot.jpeg" alt="Mobile friendly version of website header.">
