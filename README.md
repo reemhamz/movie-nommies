@@ -1,4 +1,5 @@
 <img src="/src/assets/titleShot.png" alt="Title of the site in black and yellow, saying 'The Movie Nommies'">
+
 # The Movie Nommies 🍿
   A take on Shopify's 'Shoppies' challenge.
 
@@ -71,3 +72,10 @@ If the user chooses to delete all the movies they've nominated, then the modal w
 I decided to make the nomination list appear in a small modal with a clear background, with a button on top that can also close it, and the user can also press the `esc` key to close it!
 
 <img src="/src/assets/nominationShot.png" src="results list, with the nominations modal slightly above it on the right">
+
+<br/>
+<br />
+
+When the user nominates 5 movies, nomination buttons on all movies will be disabled, and a banner will appear on top of the page notifying the user. However, user can reverse the disabled buttons by deleting one movie from the nomination list.
+
+<img src="/src/assets/limitShot.png" alt="header of the page displaying an orange banner that says 'You've reached the max amount of movies! Go into the nominations list and delete a movie to nominate another.'">
