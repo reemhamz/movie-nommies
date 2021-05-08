@@ -110,4 +110,4 @@ When the user nominates 5 movies, nomination buttons on all movies will be disab
 
 ### Responsive design
 The website is also fully functional on tablet and mobile devices. 
-<img src="/src/assets/mobileShot.jpeg" alt="Mobile friendly version of website header.">
+<img src="/src/assets/mobileShot.jpeg" alt="Mobile friendly version of website header." width="200">
