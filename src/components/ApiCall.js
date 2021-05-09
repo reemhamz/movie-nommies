@@ -9,7 +9,7 @@ import axios from "axios";
 // importing icons
 import { Ticket, Info } from "phosphor-react";
 
-// importing stuff for animation
+// importing animations
 import { StyleRoot } from "radium";
 import { animationStyles } from "./AnimationConfig";
 

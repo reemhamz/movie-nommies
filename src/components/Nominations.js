@@ -6,7 +6,7 @@ import { NominationsContext } from "./context/NominationsContext";
 // importing icons
 import { Info, Trash, XSquare } from "phosphor-react";
 
-// importing stuff for animation
+// importing animations
 import { StyleRoot } from "radium";
 import { animationStyles } from "./AnimationConfig";
 
