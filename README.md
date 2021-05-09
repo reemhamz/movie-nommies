@@ -1,5 +1,8 @@
 <img src="/src/assets/titleShot.png" alt="Title of the site in black and yellow, saying 'The Movie Nommies'">
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/afca022b-1f39-44d4-8b82-7d0d4ca754f1/deploy-status)](https://app.netlify.com/sites/movie-nommies/deploys)
+
+
 # The Movie Nommies 🍿
   A take on Shopify's 'Shoppies' challenge.
   Check out the live demo [here](https://movie-nommies.netlify.app).
@@ -110,5 +113,5 @@ When the user nominates 5 movies, nomination buttons on all movies will be disab
 
 ### Responsive design
 The website is also fully functional on tablet and mobile devices.
- 
+
 <img src="/src/assets/mobileShot.jpeg" alt="Mobile friendly version of website header." width="200">
